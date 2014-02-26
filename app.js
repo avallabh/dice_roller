@@ -28,3 +28,16 @@ Roller.IndexRoute = Ember.Route.extend({
     this.transitionTo("roll");
   }
 });
+
+Roller.RollRoute = Ember.Route.extend({
+    model: function () {
+        // in a data driven application this could be used
+        // to get information from a server.  Here we just
+        // declare an empty array in memory
+        return [];
+    },
+
+    setupController: function(controller, model) {
+        controller.set("content", model);
+    }
+});
