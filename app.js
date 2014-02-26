@@ -71,8 +71,8 @@ Roller.RollController = Ember.Controller.extend({
       sides = parseInt(roll_parts[1]);
 
       if (isNaN(rolls) || isNaN(sides)) {
-          errors += "Rolls and sides must be numbers.  ";
-        }
+        errors += "Rolls and sides must be numbers.  ";
+      }
 
       // generate the dice rolls if we haven't found any errors
       if (errors.length === 0) {
@@ -100,5 +100,21 @@ Roller.RollController = Ember.Controller.extend({
 
     // display any errors
     this.set("errors", errors);
+  }
+});
+
+Roller.DiceInputField = Ember.TextField.extend({
+  keyDown: function (event) {
+    var controller, action;
+
+    // check if we pressed the enter key
+    if (event.keyCode !== 13) {
+      return;
+    }
+
+    // call the controllers 'rollDice' function
+    controller = this.get("controller");
+    action = this.get("action");
+    controller.send(action, this.get("rollString"), this);
   }
 });
